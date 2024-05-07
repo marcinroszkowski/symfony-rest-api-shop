@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Message\Command\StoreOrderCommand;
+use App\Request\StoreOrderRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -12,6 +13,7 @@ class OrderController extends AbstractController
 {
     #[Route('/api/order', name: 'store', methods: ['POST'])]
     public function storeOrder(
+        StoreOrderRequest $orderRequest,
         MessageBusInterface $messageBus
     ): JsonResponse {
         $messageBus->dispatch(new StoreOrderCommand());
