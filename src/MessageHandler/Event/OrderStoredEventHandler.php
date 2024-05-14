@@ -10,6 +10,6 @@ class OrderStoredEventHandler
 {
     public function __invoke(OrderStoredEventContract $event): void
     {
-        echo PHP_EOL.'Order (actually) stored ~EventHandler'.PHP_EOL;
+        echo PHP_EOL.'Order: '.$event->getOrderId().' stored ~EventHandler'.PHP_EOL;
     }
 }

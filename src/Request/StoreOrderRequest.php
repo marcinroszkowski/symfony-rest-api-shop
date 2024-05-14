@@ -2,18 +2,18 @@
 
 namespace App\Request;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Collection as CollectionConstraint;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
 use Symfony\Component\Validator\Constraints\Type;
-use Symfony\Component\Validator\Constraints\Uuid;
 
 class StoreOrderRequest extends AbstractJsonRequest
 {
     #[NotBlank(message: 'Cannot be empty')]
-    #[Uuid]
-    public readonly string $clientId;
+    #[Type('integer')]
+    public readonly int $clientId;
 
     #[NotBlank(message: 'Cannot be empty')]
     #[Type('array')]
@@ -36,4 +36,14 @@ class StoreOrderRequest extends AbstractJsonRequest
         ])
     )]
     public readonly array $products;
+
+    public function getClientId(): int
+    {
+        return $this->clientId;
+    }
+
+    public function getProducts(): array
+    {
+        return $this->products;
+    }
 }
