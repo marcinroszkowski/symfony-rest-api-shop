@@ -22,7 +22,7 @@ class OrderItem
     #[Column]
     private int $id;
 
-    #[ManyToOne(targetEntity: Order::class, cascade: ['persist'], inversedBy: 'items')]
+    #[ManyToOne(targetEntity: Order::class, inversedBy: 'items')]
     private Order $order;
 
     #[ManyToOne(targetEntity: Product::class)]
@@ -94,5 +94,10 @@ class OrderItem
     public function getValue(): int
     {
         return $this->getProduct()->getPrice() * $this->getQuantity();
+    }
+
+    public function equals(OrderItem $item): bool
+    {
+        return $this->getProduct()->getId() === $item->getProduct()->getId();
     }
 }

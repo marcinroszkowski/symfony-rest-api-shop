@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\OrderRepositoryContract;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
@@ -9,7 +10,6 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\PrePersist;
@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping\PreUpdate;
 use Doctrine\ORM\Mapping\Table;
 
 #[Table(name: 'orders')]
-#[Entity]
+#[Entity(repositoryClass: OrderRepositoryContract::class)]
 #[HasLifecycleCallbacks]
 class Order
 {
@@ -27,13 +27,12 @@ class Order
     private int $id;
 
     #[ManyToOne(targetEntity: Client::class, inversedBy: 'orders')]
-    #[JoinColumn(nullable: false)]
-    private int $clientId;
+    private Client $client;
 
     #[Column]
     private int $value;
 
-    #[OneToMany(targetEntity: OrderItem::class, mappedBy: 'order', cascade: ['persist'])]
+    #[OneToMany(targetEntity: OrderItem::class, mappedBy: 'order', cascade: ['persist', 'remove'])]
     private Collection $items;
 
     #[Column(type: 'datetime')]
@@ -52,16 +51,16 @@ class Order
         return $this->id;
     }
 
-    public function setClientId(int $clientId): self
+    public function setClient(Client $client): self
     {
-        $this->clientId = $clientId;
+        $this->client = $client;
 
         return $this;
     }
 
-    public function getClientId(): int
+    public function getClient(): Client
     {
-        return $this->clientId;
+        return $this->client;
     }
 
     public function setValue(int $value): self
@@ -102,5 +101,27 @@ class Order
         }
 
         return $orderValue;
+    }
+
+    public function addItems(Collection $items): self
+    {
+        /** @var OrderItem $item */
+        foreach ($items as $item) {
+            /** @var OrderItem $existingItem */
+            foreach ($this->getItems() as $existingItem) {
+                if ($existingItem->equals($item)) {
+                    $existingItem->setQuantity(
+                        $existingItem->getQuantity() + $item->getQuantity()
+                    );
+
+                    return $this;
+                }
+            }
+
+            $this->items->add($item);
+            $item->setOrder($this);
+        }
+
+        return $this;
     }
 }

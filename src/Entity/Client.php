@@ -22,7 +22,7 @@ class Client
     #[Column(length: 255)]
     private string $name;
 
-    #[OneToMany(targetEntity: Order::class, mappedBy: 'orders')]
+    #[OneToMany(targetEntity: Order::class, mappedBy: 'client')]
     private Collection $orders;
 
     public function getId(): int
