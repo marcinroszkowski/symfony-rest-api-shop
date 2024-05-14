@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Order;
+use App\Repository\Contract\OrderRepositoryContract;
 use Doctrine\ORM\EntityManagerInterface;
 
 readonly class OrderRepository implements OrderRepositoryContract

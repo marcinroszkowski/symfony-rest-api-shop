@@ -2,9 +2,9 @@
 
 namespace App\MessageHandler\Command;
 
-use App\Message\Command\StoreOrderCommandContract;
+use App\Message\Command\Contract\StoreOrderCommandContract;
 use App\Message\Event\OrderStoredEvent;
-use App\Service\OrderServiceContract;
+use App\Service\Contract\OrderServiceContract;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 

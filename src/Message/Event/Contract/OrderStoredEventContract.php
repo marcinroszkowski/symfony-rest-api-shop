@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Message\Event;
+namespace App\Message\Event\Contract;
 
 interface OrderStoredEventContract
 {

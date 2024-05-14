@@ -3,8 +3,9 @@
 namespace App\Service;
 
 use App\Entity\Order;
-use App\Factory\OrderFactoryContract;
-use App\Repository\OrderRepositoryContract;
+use App\Factory\Contract\OrderFactoryContract;
+use App\Repository\Contract\OrderRepositoryContract;
+use App\Service\Contract\OrderServiceContract;
 
 readonly class OrderService implements OrderServiceContract
 {

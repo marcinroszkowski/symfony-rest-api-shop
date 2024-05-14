@@ -2,6 +2,8 @@
 
 namespace App\Message\Command;
 
+use App\Message\Command\Contract\StoreOrderCommandContract;
+
 readonly class StoreOrderCommand implements StoreOrderCommandContract
 {
     public function __construct(private int $clientId, private array $products)

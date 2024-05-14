@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderRepositoryContract;
+use App\Repository\Contract\OrderRepositoryContract;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;

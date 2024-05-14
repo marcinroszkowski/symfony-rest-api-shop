@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Message\Command;
+namespace App\Message\Command\Contract;
 
 interface StoreOrderCommandContract
 {

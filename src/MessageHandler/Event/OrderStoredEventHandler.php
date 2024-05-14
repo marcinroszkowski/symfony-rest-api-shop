@@ -2,7 +2,7 @@
 
 namespace App\MessageHandler\Event;
 
-use App\Message\Event\OrderStoredEventContract;
+use App\Message\Event\Contract\OrderStoredEventContract;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]

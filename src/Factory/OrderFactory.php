@@ -4,6 +4,8 @@ namespace App\Factory;
 
 use App\Entity\Client;
 use App\Entity\Order;
+use App\Factory\Contract\OrderFactoryContract;
+use App\Factory\Contract\OrderItemFactoryContract;
 use Doctrine\ORM\EntityManagerInterface;
 
 readonly class OrderFactory implements OrderFactoryContract

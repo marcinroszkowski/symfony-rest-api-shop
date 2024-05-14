@@ -4,6 +4,7 @@ namespace App\Factory;
 
 use App\Entity\OrderItem;
 use App\Entity\Product;
+use App\Factory\Contract\OrderItemFactoryContract;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;

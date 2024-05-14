@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Factory;
+namespace App\Service\Contract;
 
 use App\Entity\Order;
 
-interface OrderFactoryContract
+interface OrderServiceContract
 {
     public function create(int $clientId, array $products): Order;
 }
